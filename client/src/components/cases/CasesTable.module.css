@@ -1,0 +1,136 @@
+.tableWrapper {
+  overflow-x: auto;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.th {
+  background: var(--primary-green-lighter);
+  padding: 14px 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--primary-green-border);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: var(--transition);
+}
+
+.th:hover {
+  background: var(--primary-green-light);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.sortIcon {
+  color: var(--primary-green-dark);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.row {
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--bg-primary);
+}
+
+.row:hover {
+  background: var(--primary-green-lighter);
+}
+
+.row.selected {
+  background: var(--primary-green-light);
+  font-weight: 500;
+}
+
+.td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.link {
+  color: var(--accent-color);
+  font-weight: 500;
+  text-decoration: underline;
+  transition: var(--transition);
+}
+
+.link:hover {
+  color: var(--accent-hover);
+}
+
+.notes {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emptyState {
+  padding: 60px 20px;
+  text-align: center;
+  border: none;
+}
+
+.emptyContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.emptyContent p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 13px;
+  }
+
+  .th,
+  .td {
+    padding: 10px 8px;
+  }
+
+  .notes {
+    max-width: 150px;
+  }
+}

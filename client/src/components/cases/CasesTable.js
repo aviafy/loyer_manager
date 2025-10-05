@@ -11,7 +11,7 @@ export default function CasesTable({
   selectedId,
   onSelect,
 }) {
-  const headers = [
+  const columns = [
     { key: "rownum", label: "#", align: "center" },
     { key: "plaintiff", label: "მოსარჩელე" },
     { key: "plaintiff_id", label: "საიდენთ. ნომერი (მოს.)" },
@@ -23,12 +23,37 @@ export default function CasesTable({
     { key: "notes", label: "კომენტარი" },
   ];
 
+  const renderCell = (row, rowIndex, col) => {
+    if (col.key === "rownum") return rowIndex + 1;
+    if (col.key === "case_number") {
+      return row.case_number ? (
+        <Link
+          href={`/cases/${row._id}`}
+          onClick={(e) => e.stopPropagation()}
+          className={styles.link}
+        >
+          {row.case_number}
+        </Link>
+      ) : (
+        "—"
+      );
+    }
+    if (col.key === "notes") {
+      return row.notes ? <div className={styles.notes}>{row.notes}</div> : "—";
+    }
+    if (col.key === "amount") {
+      return row.amount || "—";
+    }
+    const value = row[col.key];
+    return value || "—";
+  };
+
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.table}>
         <thead>
           <tr>
-            {headers.map((h) => (
+            {columns.map((h) => (
               <th
                 key={h.key}
                 className={`${styles.th} ${styles[h.align || "left"]}`}
@@ -49,7 +74,7 @@ export default function CasesTable({
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={headers.length} className={styles.emptyState}>
+              <td colSpan={columns.length} className={styles.emptyState}>
                 <div className={styles.emptyContent}>
                   <span className={styles.emptyIcon}>📭</span>
                   <p>ჩანაწერები არ მოიძებნა</p>
@@ -66,35 +91,14 @@ export default function CasesTable({
                 onClick={() => onSelect && onSelect(r)}
                 onDoubleClick={() => onRowDoubleClick && onRowDoubleClick(r)}
               >
-                <td className={`${styles.td} ${styles.center}`}>{idx + 1}</td>
-                <td className={styles.td}>{r.plaintiff || "—"}</td>
-                <td className={styles.td}>{r.plaintiff_id || "—"}</td>
-                <td className={styles.td}>{r.defendant || "—"}</td>
-                <td className={styles.td}>{r.defendant_id || "—"}</td>
-                <td className={`${styles.td} ${styles.right}`}>
-                  {r.amount || "—"}
-                </td>
-                <td className={styles.td}>{r.court || "—"}</td>
-                <td className={styles.td}>
-                  {r.case_number ? (
-                    <Link
-                      href={`/cases/${r._id}`}
-                      onClick={(e) => e.stopPropagation()}
-                      className={styles.link}
-                    >
-                      {r.case_number}
-                    </Link>
-                  ) : (
-                    "—"
-                  )}
-                </td>
-                <td className={styles.td}>
-                  {r.notes ? (
-                    <div className={styles.notes}>{r.notes}</div>
-                  ) : (
-                    "—"
-                  )}
-                </td>
+                {columns.map((col) => (
+                  <td
+                    key={col.key}
+                    className={`${styles.td} ${styles[col.align || "left"]}`}
+                  >
+                    {renderCell(r, idx, col)}
+                  </td>
+                ))}
               </tr>
             ))
           )}

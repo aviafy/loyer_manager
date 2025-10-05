@@ -27,12 +27,14 @@ export default function CasesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/health").then(async (r) => {
-      try {
-        const j = await r.json();
-        setDemo(!!j.demo);
-      } catch {}
-    });
+    http
+      .get("/health")
+      .then((r) => {
+        setDemo(!!(r.data && r.data.demo));
+      })
+      .catch(() => {
+        // ignore; default demo=false
+      });
   }, []);
 
   useEffect(() => {
@@ -124,7 +126,9 @@ export default function CasesPage() {
 
   const handleExport = () => {
     const f = field === "ყველა ველი" ? "" : field;
-    window.location.href = `http://localhost:4000/api/cases/export?search=${encodeURIComponent(
+    const apiBase =
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+    window.location.href = `${apiBase}/cases/export?search=${encodeURIComponent(
       debouncedQuery
     )}&field=${encodeURIComponent(f)}`;
   };

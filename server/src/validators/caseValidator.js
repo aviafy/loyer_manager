@@ -4,20 +4,17 @@
 function validateCaseData(data) {
   const errors = {};
 
-  // Required fields - customer references
-  if (!data.plaintiffId || data.plaintiffId.trim() === "") {
-    errors.plaintiffId = "Plaintiff is required";
+  // Required fields - text fields
+  if (!data.plaintiff || data.plaintiff.trim() === "") {
+    errors.plaintiff = "Plaintiff is required";
   }
 
-  if (!data.defendantId || data.defendantId.trim() === "") {
-    errors.defendantId = "Defendant is required";
+  if (!data.defendant || data.defendant.trim() === "") {
+    errors.defendant = "Defendant is required";
   }
 
-  if (!data.clientId || data.clientId.trim() === "") {
-    errors.clientId = "Client is required";
-  }
-
-  if (!data.clientRole || !["plaintiff", "defendant"].includes(data.clientRole)) {
+  // Optional: validate customer references if provided
+  if (data.clientRole && !["plaintiff", "defendant"].includes(data.clientRole)) {
     errors.clientRole = "Client role must be 'plaintiff' or 'defendant'";
   }
 

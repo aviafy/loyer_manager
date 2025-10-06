@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import http from "@/lib/http";
 import SearchBar from "@/components/cases/SearchBar";
-import CasesTable from "@/components/cases/CasesTable";
+import TableManager from "@/components/ui/TableManager";
 import CaseForm from "@/components/cases/CaseForm";
 import CaseCard from "@/components/cases/CaseCard";
 import Modal from "@/components/ui/Modal";
@@ -184,9 +184,7 @@ function CasesPage() {
             >
               🗑️ წაშლა
             </Button>
-            <Button onClick={handleExport} variant="secondary" size="medium">
-              📤 Excel ექსპორტი
-            </Button>
+            {/* Export moved to table footer */}
           </div>
         </div>
 
@@ -209,27 +207,48 @@ function CasesPage() {
                 ))}
               </div>
             ) : (
-              <CasesTable
-                rows={sorted}
-                sortState={sort}
-                selectedId={selected?._id}
-                onSelect={(r) => setSelected(r)}
-                onSort={(k) =>
-                  setSort((s) => ({ key: k, asc: s.key === k ? !s.asc : true }))
-                }
-                onRowDoubleClick={(r) => {
-                  setSelected(r);
-                  setEditing(r);
-                  setShowModal(true);
-                }}
-              />
+              <>
+                {(() => {
+                  const columns = [
+                    { key: "rownum", label: "#", align: "center" },
+                    { key: "plaintiff", label: "მოსარჩელე" },
+                    { key: "plaintiff_id", label: "საიდენთ. ნომერი (მოს.)" },
+                    { key: "defendant", label: "მოპასუხე" },
+                    { key: "defendant_id", label: "საიდენთ. ნომერი (მოპ.)" },
+                    {
+                      key: "amount",
+                      label: "მოთხოვნის ოდენობა",
+                      align: "right",
+                    },
+                    { key: "court", label: "განმხილველი ორგანო" },
+                    { key: "case_number", label: "საქმის ნომერი" },
+                    { key: "notes", label: "კომენტარი" },
+                  ];
+                  return (
+                    <TableManager
+                      rows={sorted}
+                      columns={columns}
+                      sortState={sort}
+                      selectedId={selected?._id}
+                      onSelect={(r) => setSelected(r)}
+                      onSort={(k) =>
+                        setSort((s) => ({
+                          key: k,
+                          asc: s.key === k ? !s.asc : true,
+                        }))
+                      }
+                      onRowDoubleClick={(r) => {
+                        setSelected(r);
+                        setEditing(r);
+                        setShowModal(true);
+                      }}
+                      onExport={handleExport}
+                    />
+                  );
+                })()}
+              </>
             )}
-
-            <div className={styles.footer}>
-              <p className={styles.totalResults}>
-                სულ: <strong>{total}</strong> შედეგი
-              </p>
-            </div>
+            {/* Removed separate total footer; info is handled by the table */}
           </>
         )}
 

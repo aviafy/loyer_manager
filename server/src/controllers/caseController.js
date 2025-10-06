@@ -19,9 +19,6 @@ async function exportCases(req, res, next) {
     query.companyId = req.companyId;
 
     const cases = await Case.find(query)
-      .populate("plaintiffId", "name email phone")
-      .populate("defendantId", "name email phone")
-      .populate("clientId", "name email phone")
       .sort({ _id: 1 })
       .lean();
     const workbook = await generateCasesExcel(cases);
@@ -68,9 +65,6 @@ async function listCases(req, res, next) {
     const { pageNum, limitNum } = validatePagination(page, limit);
 
     const docs = await Case.find(query)
-      .populate("plaintiffId", "name email phone")
-      .populate("defendantId", "name email phone")
-      .populate("clientId", "name email phone")
       .sort({ [sort]: order === "desc" ? -1 : 1 })
       .skip((pageNum - 1) * limitNum)
       .limit(limitNum)
@@ -129,11 +123,7 @@ async function getCaseById(req, res, next) {
     const doc = await Case.findOne({
       _id: req.params.id,
       companyId: req.companyId,
-    })
-      .populate("plaintiffId", "name email phone address nationalId")
-      .populate("defendantId", "name email phone address nationalId")
-      .populate("clientId", "name email phone address nationalId")
-      .lean();
+    }).lean();
 
     if (!doc) {
       return res.status(404).json({ error: "Case not found" });

@@ -82,6 +82,75 @@
   font-weight: 400;
 }
 
+.customerFieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.expandBtn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--primary-green);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.expandBtn:hover {
+  background-color: var(--primary-green-lighter);
+  color: var(--primary-green-dark);
+}
+
+.expandedForm {
+  margin-top: 8px;
+  padding: 16px;
+  background: #f8fdf9;
+  border: 1px solid var(--primary-green-lighter);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.expandedFormHeader {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--primary-green-lighter);
+}
+
+.expandedFormHeader h5 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-green-dark);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;
@@ -102,6 +171,10 @@
 
   .sectionTitle {
     font-size: 15px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
   }
 
   .actions {

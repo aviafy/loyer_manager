@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <Header />
-          <main style={{ paddingTop: "70px", minHeight: "100vh" }}>
+          <main style={{ paddingTop: "56px", minHeight: "100vh" }}>
             {children}
           </main>
         </AuthProvider>

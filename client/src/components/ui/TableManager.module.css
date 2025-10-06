@@ -18,11 +18,11 @@
 }
 
 .th {
-  background: var(--primary-green-lighter);
+  background: var(--bg-tertiary);
   padding: 14px 12px;
   font-weight: 600;
   color: var(--text-primary);
-  border-bottom: 2px solid var(--primary-green-border);
+  border-bottom: 2px solid var(--border-color);
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
@@ -33,7 +33,7 @@
 }
 
 .th:hover {
-  background: var(--primary-green-light);
+  background: var(--primary-10);
 }
 
 .headerContent {
@@ -44,7 +44,7 @@
 }
 
 .sortIcon {
-  color: var(--primary-green-dark);
+  color: var(--primary-accent);
   font-weight: bold;
   font-size: 14px;
 }
@@ -56,11 +56,11 @@
 }
 
 .row:hover {
-  background: var(--primary-green-lighter);
+  background: var(--primary-05);
 }
 
 .row.selected {
-  background: var(--primary-green-light);
+  background: var(--primary-10);
   font-weight: 500;
 }
 
@@ -83,14 +83,14 @@
 }
 
 .link {
-  color: var(--accent-color);
+  color: var(--primary-button);
   font-weight: 500;
   text-decoration: underline;
   transition: var(--transition);
 }
 
 .link:hover {
-  color: var(--accent-hover);
+  color: var(--primary-button-hover);
 }
 
 .notes {
@@ -179,13 +179,13 @@
 }
 
 .select:hover {
-  border-color: var(--primary-green);
+  border-color: var(--primary-button);
 }
 
 .select:focus {
   outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+  border-color: var(--primary-button);
+  box-shadow: var(--focus-ring);
 }
 
 .totalResults {
@@ -195,7 +195,7 @@
 }
 
 .totalResults strong {
-  color: var(--primary-green-dark);
+  color: var(--primary-accent);
   font-size: 16px;
 }
 
@@ -229,14 +229,14 @@
 }
 
 .pageButton:hover:not(:disabled) {
-  background: var(--primary-green-lighter);
-  border-color: var(--primary-green);
+  background: var(--primary-10);
+  border-color: var(--primary-button);
 }
 
 .pageButton.active {
-  background: var(--primary-green);
+  background: var(--primary-button);
   color: white;
-  border-color: var(--primary-green);
+  border-color: var(--primary-button);
 }
 
 .pageButton:disabled {

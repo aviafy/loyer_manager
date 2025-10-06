@@ -5,37 +5,60 @@
 }
 
 :root {
-  --primary-green: #4caf50;
-  --primary-green-light: #d9f2d9;
-  --primary-green-lighter: #e6ffe6;
-  --primary-green-border: #bfe5bf;
-  --primary-green-dark: #357a38;
-  --primary-green-darker: #2e7d32;
+  /* Primary Colors - Unified Blue Theme */
+  --primary-header: #2563eb; /* Blue 600 */
+  --primary-button: #2563eb; /* Blue 600 */
+  --primary-button-hover: #1d4ed8; /* Blue 700 */
+  --primary-accent: #1e3a8a; /* Blue 900 */
 
-  --accent-color: #1a73e8;
-  --accent-hover: #1557b0;
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc; /* Very light blue-gray */
+  --bg-tertiary: #eef2f7;
 
+  /* Text Colors */
+  --text-primary: #1f2937; /* Gray 800 */
+  --text-secondary: #4b5563; /* Gray 600 */
+  --text-tertiary: #6b7280; /* Gray 500 */
+  --text-on-primary: #ffffff;
+
+  /* Status Colors */
   --error-color: #d32f2f;
   --warning-color: #f57c00;
+  --success-color: #059669;
 
-  --text-primary: #1a1a1a;
-  --text-secondary: #666;
-  --text-tertiary: #999;
-
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-tertiary: #fafafa;
-
-  --border-color: #e0e0e0;
+  /* Border & Shadow */
+  --border-color: #e5e7eb; /* Gray 200 */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
 
+  /* Border Radius */
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
 
+  /* Transitions */
   --transition: all 0.2s ease;
+
+  /* Alpha tokens for primary (blue) */
+  --primary-05: rgba(37, 99, 235, 0.05);
+  --primary-10: rgba(37, 99, 235, 0.1);
+  --primary-15: rgba(37, 99, 235, 0.15);
+  --primary-20: rgba(37, 99, 235, 0.2);
+  --primary-30: rgba(37, 99, 235, 0.3);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px var(--primary-15);
+
+  /* Legacy green aliases mapped to primary for consistency */
+  --primary-green: var(--primary-button);
+  --primary-green-dark: var(--primary-button-hover);
+  --primary-green-light: var(--primary-10);
+  --primary-green-lighter: var(--primary-05);
+  --primary-green-hover: var(--primary-button-hover);
+  --primary-green-border: var(--border-color);
 }
 
 html,
@@ -56,13 +79,13 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap");
 
 a {
-  color: var(--accent-color);
+  color: var(--primary-button);
   text-decoration: none;
   transition: var(--transition);
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--primary-button-hover);
   text-decoration: underline;
 }
 
@@ -70,7 +93,7 @@ button {
   font-family: inherit;
   cursor: pointer;
   border: none;
-  background: var(--primary-green);
+  background: var(--primary-button);
   color: white;
   padding: 10px 18px;
   border-radius: var(--border-radius-md);
@@ -84,7 +107,7 @@ button {
 }
 
 button:hover:not(:disabled) {
-  background: var(--primary-green-darker);
+  background: var(--primary-button-hover);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
@@ -107,7 +130,7 @@ button.secondary {
 
 button.secondary:hover:not(:disabled) {
   background: var(--bg-tertiary);
-  border-color: var(--primary-green);
+  border-color: var(--primary-button);
 }
 
 button.danger {
@@ -136,8 +159,8 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  border-color: var(--primary-button);
+  box-shadow: var(--focus-ring);
 }
 
 label {
@@ -169,8 +192,8 @@ label {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid var(--primary-green-light);
-  border-top-color: var(--primary-green);
+  border: 4px solid var(--primary-20);
+  border-top-color: var(--primary-button);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -192,10 +215,10 @@ label {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-green-border);
+  background: var(--primary-30);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-green);
+  background: var(--primary-button);
 }

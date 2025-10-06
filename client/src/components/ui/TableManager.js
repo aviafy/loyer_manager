@@ -178,16 +178,6 @@ export default function TableManager({
               <option value="250">250</option>
             </select>
           </div>
-
-          <p className={styles.totalResults}>
-            სულ: <strong>{rows.length}</strong> შედეგი
-            {rows.length > 0 && (
-              <span className={styles.rangeInfo}>
-                {" "}
-                (ნაჩვენებია {startIndex + 1}-{Math.min(endIndex, rows.length)})
-              </span>
-            )}
-          </p>
         </div>
 
         <div className={styles.footerCenter}>

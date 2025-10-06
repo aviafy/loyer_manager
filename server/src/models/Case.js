@@ -8,27 +8,34 @@ const CaseSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
-    // Party references
+    // Party information (text fields)
+    plaintiff: {
+      type: String,
+      required: true,
+    },
+    plaintiff_id: String,
+    defendant: {
+      type: String,
+      required: true,
+    },
+    defendant_id: String,
+    // Optional: Party references if customers exist
     plaintiffId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
-      required: true,
     },
     defendantId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
-      required: true,
     },
     // Who is the lawyer's client
     clientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
-      required: true,
     },
     clientRole: {
       type: String,
       enum: ["plaintiff", "defendant"],
-      required: true,
     },
     court: String,
     judge: String,
@@ -67,6 +74,8 @@ CaseSchema.index({ companyId: 1, case_number: 1 });
 
 // Text search index (scoped by company in queries)
 CaseSchema.index({
+  plaintiff: "text",
+  defendant: "text",
   court: "text",
   case_number: "text",
   notes: "text",

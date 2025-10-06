@@ -30,20 +30,20 @@
   position: relative;
   height: 20px;
   width: 20px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 4px;
-  background-color: white;
-  transition: all 0.2s ease;
+  background-color: var(--bg-primary);
+  transition: var(--transition);
   flex-shrink: 0;
 }
 
 .label:hover .checkmark {
-  border-color: #4caf50;
+  border-color: var(--primary-button);
 }
 
 .input:checked ~ .checkmark {
-  background-color: #4caf50;
-  border-color: #4caf50;
+  background-color: var(--primary-button);
+  border-color: var(--primary-button);
 }
 
 .checkmark:after {
@@ -64,16 +64,16 @@
 }
 
 .input:focus ~ .checkmark {
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  box-shadow: var(--focus-ring);
 }
 
 .labelText {
   font-size: 0.9rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .error {
   font-size: 0.85rem;
-  color: #d32f2f;
+  color: var(--error-color);
   margin-left: 2rem;
 }

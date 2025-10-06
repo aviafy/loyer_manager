@@ -24,6 +24,24 @@ export default function CaseForm({ initial = {}, onSubmit, onCancel }) {
   const [submitting, setSubmitting] = useState(false);
   const [showCustomerModal, setShowCustomerModal] = useState(false);
   const [customerModalFor, setCustomerModalFor] = useState(null); // 'plaintiff' or 'defendant'
+  const [expandedPlaintiffForm, setExpandedPlaintiffForm] = useState(false);
+  const [expandedDefendantForm, setExpandedDefendantForm] = useState(false);
+  const [plaintiffFormData, setPlaintiffFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    nationalId: "",
+    notes: "",
+  });
+  const [defendantFormData, setDefendantFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    nationalId: "",
+    notes: "",
+  });
 
   function bind(field) {
     return {
@@ -31,6 +49,16 @@ export default function CaseForm({ initial = {}, onSubmit, onCancel }) {
       onChange: (e) => setForm((f) => ({ ...f, [field]: e.target.value })),
     };
   }
+
+  const bindPlaintiffForm = (field) => ({
+    value: plaintiffFormData[field],
+    onChange: (e) => setPlaintiffFormData((f) => ({ ...f, [field]: e.target.value })),
+  });
+
+  const bindDefendantForm = (field) => ({
+    value: defendantFormData[field],
+    onChange: (e) => setDefendantFormData((f) => ({ ...f, [field]: e.target.value })),
+  });
 
   const handleCustomerChange = (field, customer) => {
     setForm((f) => ({ ...f, [field]: customer }));
@@ -109,20 +137,118 @@ export default function CaseForm({ initial = {}, onSubmit, onCancel }) {
         <div className={styles.section}>
           <h4 className={styles.sectionTitle}>{CASE_SECTIONS.PARTIES.title}</h4>
           <div className={styles.grid}>
-            <CustomerAutocomplete
-              label={CASE_FIELDS.PLAINTIFF.label}
-              required={CASE_FIELDS.PLAINTIFF.required}
-              value={form.plaintiffId}
-              onChange={(customer) => handleCustomerChange("plaintiffId", customer)}
-              onCreateNew={() => handleCreateCustomer("plaintiff")}
-            />
-            <CustomerAutocomplete
-              label={CASE_FIELDS.DEFENDANT.label}
-              required={CASE_FIELDS.DEFENDANT.required}
-              value={form.defendantId}
-              onChange={(customer) => handleCustomerChange("defendantId", customer)}
-              onCreateNew={() => handleCreateCustomer("defendant")}
-            />
+            <div className={styles.customerFieldWrapper}>
+              <CustomerAutocomplete
+                label={CASE_FIELDS.PLAINTIFF.label}
+                required={CASE_FIELDS.PLAINTIFF.required}
+                value={form.plaintiffId}
+                onChange={(customer) => handleCustomerChange("plaintiffId", customer)}
+                onCreateNew={() => handleCreateCustomer("plaintiff")}
+              />
+              <button
+                type="button"
+                className={styles.expandBtn}
+                onClick={() => setExpandedPlaintiffForm(!expandedPlaintiffForm)}
+              >
+                {expandedPlaintiffForm ? "▼ დამალვა" : "▶ მოსარჩელის ფორმა"}
+              </button>
+              {expandedPlaintiffForm && (
+                <div className={styles.expandedForm}>
+                  <div className={styles.expandedFormHeader}>
+                    <h5>მოსარჩელის დეტალები</h5>
+                  </div>
+                  <TextInput
+                    label="სახელი"
+                    placeholder="შეიყვანეთ სახელი"
+                    {...bindPlaintiffForm("name")}
+                  />
+                  <div className={styles.row}>
+                    <TextInput
+                      label="ელ. ფოსტა"
+                      type="email"
+                      placeholder="example@email.com"
+                      {...bindPlaintiffForm("email")}
+                    />
+                    <TextInput
+                      label="ტელეფონი"
+                      placeholder="+995 555 123 456"
+                      {...bindPlaintiffForm("phone")}
+                    />
+                  </div>
+                  <TextInput
+                    label="მისამართი"
+                    placeholder="შეიყვანეთ მისამართი"
+                    {...bindPlaintiffForm("address")}
+                  />
+                  <TextInput
+                    label="პირადი ნომერი"
+                    placeholder="01001234567"
+                    {...bindPlaintiffForm("nationalId")}
+                  />
+                  <TextInput
+                    label="შენიშვნები"
+                    placeholder="დამატებითი ინფორმაცია..."
+                    {...bindPlaintiffForm("notes")}
+                  />
+                </div>
+              )}
+            </div>
+            <div className={styles.customerFieldWrapper}>
+              <CustomerAutocomplete
+                label={CASE_FIELDS.DEFENDANT.label}
+                required={CASE_FIELDS.DEFENDANT.required}
+                value={form.defendantId}
+                onChange={(customer) => handleCustomerChange("defendantId", customer)}
+                onCreateNew={() => handleCreateCustomer("defendant")}
+              />
+              <button
+                type="button"
+                className={styles.expandBtn}
+                onClick={() => setExpandedDefendantForm(!expandedDefendantForm)}
+              >
+                {expandedDefendantForm ? "▼ დამალვა" : "▶ მოპასუხის ფორმა"}
+              </button>
+              {expandedDefendantForm && (
+                <div className={styles.expandedForm}>
+                  <div className={styles.expandedFormHeader}>
+                    <h5>მოპასუხის დეტალები</h5>
+                  </div>
+                  <TextInput
+                    label="სახელი"
+                    placeholder="შეიყვანეთ სახელი"
+                    {...bindDefendantForm("name")}
+                  />
+                  <div className={styles.row}>
+                    <TextInput
+                      label="ელ. ფოსტა"
+                      type="email"
+                      placeholder="example@email.com"
+                      {...bindDefendantForm("email")}
+                    />
+                    <TextInput
+                      label="ტელეფონი"
+                      placeholder="+995 555 123 456"
+                      {...bindDefendantForm("phone")}
+                    />
+                  </div>
+                  <TextInput
+                    label="მისამართი"
+                    placeholder="შეიყვანეთ მისამართი"
+                    {...bindDefendantForm("address")}
+                  />
+                  <TextInput
+                    label="პირადი ნომერი"
+                    placeholder="01001234567"
+                    {...bindDefendantForm("nationalId")}
+                  />
+                  <TextInput
+                    label="შენიშვნები"
+                    placeholder="დამატებითი ინფორმაცია..."
+                    {...bindDefendantForm("notes")}
+                  />
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Who is your client? */}

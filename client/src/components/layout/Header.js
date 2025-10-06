@@ -32,6 +32,9 @@ export default function Header() {
                 onClick={() => setIsCompanyExpanded(!isCompanyExpanded)}
                 aria-expanded={isCompanyExpanded}
               >
+                <div className={styles.companyAvatar} aria-hidden="true">
+                  <img src="/default-company.svg" alt="" />
+                </div>
                 <div className={styles.companyInfo}>
                   <div className={styles.companyName}>{company?.name}</div>
                   <div className={styles.userName}>
@@ -91,7 +94,12 @@ export default function Header() {
                       className={styles.dropdownItem}
                       onClick={() => setIsCompanyExpanded(false)}
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
                         <path
                           d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
                           stroke="currentColor"

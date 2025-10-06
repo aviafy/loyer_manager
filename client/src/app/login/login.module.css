@@ -66,8 +66,8 @@
 
 .field input:focus {
   outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+  border-color: var(--primary-button);
+  box-shadow: var(--focus-ring);
 }
 
 .error {
@@ -81,7 +81,7 @@
 
 .submitBtn {
   padding: 14px;
-  background: var(--primary-green);
+  background: var(--primary-button);
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -92,7 +92,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: var(--primary-green-hover);
+  background: var(--primary-button-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
@@ -110,12 +110,13 @@
 }
 
 .link {
-  color: var(--primary-green);
+  color: var(--primary-button);
   text-decoration: none;
   font-weight: 600;
 }
 
 .link:hover {
+  color: var(--primary-button-hover);
   text-decoration: underline;
 }
 

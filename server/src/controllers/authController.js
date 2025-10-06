@@ -179,7 +179,11 @@ async function login(req, res, next) {
  * Logout and clear auth cookie
  */
 function logout(req, res) {
-  res.clearCookie("authToken");
+  res.clearCookie("authToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  });
   res.json({ message: "Logout successful" });
 }
 

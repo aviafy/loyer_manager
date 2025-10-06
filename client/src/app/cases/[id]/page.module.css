@@ -111,6 +111,195 @@
   white-space: pre-wrap;
 }
 
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.createLinkBtn {
+  padding: 8px 16px;
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.createLinkBtn:hover {
+  background: var(--primary-green-hover);
+  transform: translateY(-1px);
+}
+
+.noLinks {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linkCard {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.linkInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.linkStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statusBadge.active {
+  background: rgba(72, 187, 120, 0.1);
+  color: var(--primary-green);
+}
+
+.statusBadge.revoked {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.statusBadge.expired {
+  background: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+}
+
+.recipientEmail,
+.passwordProtected {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.linkUrl {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--primary-green);
+  word-break: break-all;
+  background: white;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.linkMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.linkActions {
+  display: flex;
+  gap: 8px;
+}
+
+.copyBtn,
+.revokeBtn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.copyBtn {
+  background: rgba(72, 187, 120, 0.1);
+  color: var(--primary-green);
+}
+
+.copyBtn:hover {
+  background: var(--primary-green);
+  color: white;
+}
+
+.revokeBtn {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.revokeBtn:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.linkForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.field input {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+
+.field small {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 16px 0;

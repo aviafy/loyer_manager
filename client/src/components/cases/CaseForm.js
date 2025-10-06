@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import useResponsive from "@/hooks/useResponsive";
+import { TextInput, DateInput, TextArea, Button } from "@/components/ui/inputs";
+import { CASE_FIELDS, CASE_SECTIONS } from "@/constants";
 import styles from "./CaseForm.module.css";
 
 export default function CaseForm({ initial = {}, onSubmit, onCancel }) {
-  const { isMobile } = useResponsive();
   const [form, setForm] = useState(() => ({
     plaintiff: initial.plaintiff || "",
     plaintiff_id: initial.plaintiff_id || "",
@@ -40,107 +40,88 @@ export default function CaseForm({ initial = {}, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      {/* Parties Section */}
       <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>მხარეები</h4>
+        <h4 className={styles.sectionTitle}>{CASE_SECTIONS.PARTIES.title}</h4>
         <div className={styles.grid}>
-          <div className={styles.field}>
-            <label>
-              მოსარჩელე <span className={styles.required}>*</span>
-            </label>
-            <input
-              type="text"
-              {...bind("plaintiff")}
-              placeholder="შეიყვანეთ მოსარჩელის სახელი"
-              required
-            />
-          </div>
-          <div className={styles.field}>
-            <label>საიდენთიფიკაციო ნომერი (მოს.)</label>
-            <input
-              type="text"
-              {...bind("plaintiff_id")}
-              placeholder="მაგ: 01001234567"
-            />
-          </div>
-          <div className={styles.field}>
-            <label>
-              მოპასუხე <span className={styles.required}>*</span>
-            </label>
-            <input
-              type="text"
-              {...bind("defendant")}
-              placeholder="შეიყვანეთ მოპასუხის სახელი"
-              required
-            />
-          </div>
-          <div className={styles.field}>
-            <label>საიდენთიფიკაციო ნომერი (მოპ.)</label>
-            <input
-              type="text"
-              {...bind("defendant_id")}
-              placeholder="მაგ: 01001234567"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>საქმის ინფორმაცია</h4>
-        <div className={styles.grid}>
-          <div className={styles.field}>
-            <label>საქმის ნომერი</label>
-            <input
-              type="text"
-              {...bind("case_number")}
-              placeholder="მაგ: 2/1234-23"
-            />
-          </div>
-          <div className={styles.field}>
-            <label>მოთხოვნის ოდენობა</label>
-            <input type="text" {...bind("amount")} placeholder="მაგ: 5000 ₾" />
-          </div>
-          <div className={styles.field}>
-            <label>განმხილველი ორგანო</label>
-            <input
-              type="text"
-              {...bind("court")}
-              placeholder="მაგ: თბილისის საქალაქო სასამართლო"
-            />
-          </div>
-          <div className={styles.field}>
-            <label>წარმოებაში მიღების თარიღი</label>
-            <input type="date" {...bind("initiation_date")} />
-          </div>
-          <div className={styles.field}>
-            <label>სხდომის თარიღი</label>
-            <input type="date" {...bind("hearing_date")} />
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>კომენტარი</h4>
-        <div className={styles.field}>
-          <textarea
-            {...bind("notes")}
-            placeholder="დამატებითი ინფორმაცია..."
-            rows={5}
+          <TextInput
+            label={CASE_FIELDS.PLAINTIFF.label}
+            placeholder={CASE_FIELDS.PLAINTIFF.placeholder}
+            required={CASE_FIELDS.PLAINTIFF.required}
+            {...bind("plaintiff")}
+          />
+          <TextInput
+            label={CASE_FIELDS.PLAINTIFF_ID.label}
+            placeholder={CASE_FIELDS.PLAINTIFF_ID.placeholder}
+            {...bind("plaintiff_id")}
+          />
+          <TextInput
+            label={CASE_FIELDS.DEFENDANT.label}
+            placeholder={CASE_FIELDS.DEFENDANT.placeholder}
+            required={CASE_FIELDS.DEFENDANT.required}
+            {...bind("defendant")}
+          />
+          <TextInput
+            label={CASE_FIELDS.DEFENDANT_ID.label}
+            placeholder={CASE_FIELDS.DEFENDANT_ID.placeholder}
+            {...bind("defendant_id")}
           />
         </div>
       </div>
 
+      {/* Case Info Section */}
+      <div className={styles.section}>
+        <h4 className={styles.sectionTitle}>{CASE_SECTIONS.CASE_INFO.title}</h4>
+        <div className={styles.grid}>
+          <TextInput
+            label={CASE_FIELDS.CASE_NUMBER.label}
+            placeholder={CASE_FIELDS.CASE_NUMBER.placeholder}
+            {...bind("case_number")}
+          />
+          <TextInput
+            label={CASE_FIELDS.AMOUNT.label}
+            placeholder={CASE_FIELDS.AMOUNT.placeholder}
+            {...bind("amount")}
+          />
+          <TextInput
+            label={CASE_FIELDS.COURT.label}
+            placeholder={CASE_FIELDS.COURT.placeholder}
+            {...bind("court")}
+          />
+          <DateInput
+            label={CASE_FIELDS.INITIATION_DATE.label}
+            {...bind("initiation_date")}
+          />
+          <DateInput
+            label={CASE_FIELDS.HEARING_DATE.label}
+            {...bind("hearing_date")}
+          />
+        </div>
+      </div>
+
+      {/* Notes Section */}
+      <div className={styles.section}>
+        <h4 className={styles.sectionTitle}>{CASE_SECTIONS.NOTES.title}</h4>
+        <TextArea
+          placeholder={CASE_FIELDS.NOTES.placeholder}
+          rows={5}
+          {...bind("notes")}
+        />
+      </div>
+
+      {/* Actions */}
       <div className={styles.actions}>
-        <button
+        <Button
           type="button"
+          variant="secondary"
           onClick={onCancel}
-          className="secondary"
           disabled={submitting}
         >
           ❌ გაუქმება
-        </button>
-        <button type="submit" disabled={submitting}>
-          {submitting ? "მიმდინარეობს..." : "💾 შენახვა"}
-        </button>
+        </Button>
+        <Button type="submit" loading={submitting}>
+          💾 შენახვა
+        </Button>
       </div>
     </form>
   );

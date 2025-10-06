@@ -25,18 +25,61 @@
   gap: 16px;
 }
 
-.field {
+/* Field styles moved to Input.module.css */
+
+.clientSelector {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.clientLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.radioGroup {
   display: flex;
-  flex-direction: column;
+  gap: 24px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
   gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
-.field label {
-  margin-bottom: 0;
+.radioLabel:hover {
+  background: #e9ecef;
 }
 
-.required {
-  color: var(--error-color);
+.radioLabel input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.radioLabel input[type="radio"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.radioLabel span {
+  font-weight: 500;
+}
+
+.clientName {
+  color: #6c757d;
+  font-size: 0.9em;
+  font-weight: 400;
 }
 
 .actions {

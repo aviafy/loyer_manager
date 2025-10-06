@@ -1,0 +1,141 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.required {
+  color: #d32f2f;
+  margin-left: 0.2rem;
+}
+
+.input,
+.select,
+.textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.input.error,
+.select.error,
+.textarea.error {
+  border-color: #d32f2f;
+}
+
+.input.error:focus,
+.select.error:focus,
+.textarea.error:focus {
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.errorText {
+  font-size: 0.85rem;
+  color: #d32f2f;
+  margin-top: -0.25rem;
+}
+
+.select {
+  cursor: pointer;
+  background-color: white;
+}
+
+/* Input wrappers */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.validIcon {
+  position: absolute;
+  right: 0.75rem;
+  color: #4caf50;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Password Input */
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInput {
+  padding-right: 3rem;
+}
+
+.togglePassword {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.togglePassword:hover {
+  opacity: 1;
+}
+
+/* Password Strength Meter */
+.strengthMeter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.strengthBar {
+  flex: 1;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strengthFill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strengthText {
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-width: 60px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

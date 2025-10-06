@@ -1,0 +1,225 @@
+.page {
+  padding: 40px 0;
+  min-height: calc(100vh - 70px);
+  background: var(--bg-primary);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.loading p {
+  color: var(--text-secondary);
+}
+
+.passwordForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.passwordForm h3 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+.passwordForm p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.passwordForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.passwordForm input {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+}
+
+.passwordForm input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+
+.passwordForm button {
+  padding: 12px;
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.passwordForm button:hover:not(:disabled) {
+  background: var(--primary-green-hover);
+}
+
+.passwordForm button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.error h3 {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  color: #dc3545;
+}
+
+.error p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-green-dark);
+  margin: 0 0 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary-green-lighter);
+}
+
+.detailRow {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.value {
+  color: var(--text-primary);
+  font-size: 15px;
+  word-break: break-word;
+}
+
+.notesBox {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.watermark {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-style: italic;
+  border-top: 2px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 20px 0;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .detailRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+  }
+
+  .label {
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+
+  .value {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

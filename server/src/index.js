@@ -1,20 +1,26 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 const config = require("./config");
 const { connectMongo } = require("./db/mongoose");
 const demoMiddleware = require("./middleware/demo");
 const { errorHandler, notFoundHandler } = require("./middleware/errorHandler");
+const authRouter = require("./routes/auth");
+const usersRouter = require("./routes/users");
 const casesRouter = require("./routes/cases");
+const customersRouter = require("./routes/customers");
+const shareableLinksRouter = require("./routes/shareableLinks");
 
 // Initialize Express app
 const app = express();
 
 // Middleware
-app.use(cors({ origin: config.corsOrigin }));
+app.use(cors({ origin: config.corsOrigin, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Logging (only in development)
 if (config.nodeEnv === "development") {
@@ -35,7 +41,11 @@ app.get("/api/health", (req, res) => {
 app.use(demoMiddleware);
 
 // API Routes
+app.use("/api/auth", authRouter);
+app.use("/api/users", usersRouter);
 app.use("/api/cases", casesRouter);
+app.use("/api/customers", customersRouter);
+app.use("/api/shareable-links", shareableLinksRouter);
 
 // 404 handler
 app.use(notFoundHandler);

@@ -1,107 +1,338 @@
 .searchBar {
   display: flex;
-  gap: 16px;
-  align-items: flex-end;
-  padding: 16px 20px;
-  background: var(--bg-primary);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-}
-
-.filterGroup,
-.searchGroup {
-  display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.filterGroup {
-  flex: 0 0 280px;
-}
-
-.searchGroup {
+  gap: 12px;
   flex: 1;
-  min-width: 0;
+  position: relative;
 }
 
-.label {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text-primary);
+.searchContainer {
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 6px;
-}
-
-.searchIcon {
-  font-size: 16px;
-}
-
-.select {
-  height: 42px;
-  cursor: pointer;
-}
-
-.select:hover {
-  border-color: var(--primary-green);
 }
 
 .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  font-size: 18px;
+  color: #666;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .input {
-  height: 42px;
-  padding-right: 40px;
+  width: 100%;
+  height: 48px;
+  padding: 0.875rem 1.5rem;
+  padding-left: 48px;
+  padding-right: 44px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  font-size: 15px;
+  transition: all 0.2s ease;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.input:hover {
+  border-color: var(--primary-green-light);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+  background: white;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
 }
 
 .clearButton {
   position: absolute;
-  right: 8px;
-  background: transparent;
+  right: 10px;
+  background: var(--bg-secondary);
   border: none;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   font-size: 18px;
-  padding: 4px 8px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
-  border-radius: var(--border-radius-sm);
-  transition: var(--transition);
-  box-shadow: none;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .clearButton:hover {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  transform: none;
+  background: var(--danger-color);
+  color: white;
+  transform: scale(1.1);
 }
 
+/* Filter Toggle Button */
+.filterToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.filterToggle:hover {
+  border-color: var(--primary-green);
+  background: var(--primary-green-lighter);
+  transform: scale(1.05);
+}
+
+.filterToggle.active {
+  border-color: var(--primary-green);
+  background: var(--primary-green-light);
+  transform: scale(1.05);
+}
+
+.selectedFilter {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Filter Pills */
+.filterPills {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+  z-index: 100;
+  background: var(--bg-primary);
+  border: 2px solid var(--primary-green-light);
+  border-radius: var(--border-radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pillsHeader {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.pillsTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.pill:hover {
+  border-color: var(--primary-green);
+  background: var(--primary-green-lighter);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pillActive {
+  background: var(--primary-green);
+  border-color: var(--primary-green-dark);
+  color: white;
+  font-weight: 600;
+}
+
+.pillActive:hover {
+  background: var(--primary-green-dark);
+  transform: translateY(-2px);
+}
+
+.pillIcon {
+  font-size: 16px;
+}
+
+.pillLabel {
+  font-size: 14px;
+}
+
+.pillCheck {
+  font-size: 14px;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+/* Active Filter Badge */
+.activeFilterBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, var(--primary-green-light) 0%, var(--primary-green-lighter) 100%);
+  border: 2px solid var(--primary-green);
+  border-radius: 24px;
+  font-size: 13px;
+  color: var(--primary-green-dark);
+  animation: fadeIn 0.3s ease;
+  box-shadow: 0 2px 6px rgba(46, 125, 50, 0.15);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.badgeIcon {
+  font-size: 16px;
+}
+
+.badgeText {
+  font-weight: 500;
+}
+
+.badgeText strong {
+  font-weight: 700;
+}
+
+.badgeRemove {
+  background: white;
+  border: none;
+  color: var(--primary-green-dark);
+  font-size: 16px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+}
+
+.badgeRemove:hover {
+  background: var(--danger-color);
+  color: white;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Responsive Design */
 @media (max-width: 1024px) {
-  .searchBar {
+  .searchContainer {
     flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
   }
 
-  .filterGroup {
-    flex: 1;
+  .filterToggle {
+    width: 100%;
+    justify-content: center;
   }
 }
 
 @media (max-width: 768px) {
-  .searchBar {
-    padding: 16px;
+  .input {
+    height: 44px;
+    font-size: 14px;
+    padding-left: 44px;
   }
 
-  .label {
+  .searchIcon {
+    left: 14px;
+    font-size: 16px;
+  }
+
+  .filterToggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .selectedFilter {
+    font-size: 20px;
+  }
+
+  .pillsContainer {
+    gap: 6px;
+  }
+
+  .pill {
+    padding: 8px 12px;
     font-size: 13px;
   }
 
-  .select,
-  .input {
-    height: 40px;
+  .pillIcon {
     font-size: 14px;
+  }
+
+  .pillLabel {
+    font-size: 13px;
+  }
+
+  .activeFilterBadge {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pillsContainer {
+    flex-direction: column;
+  }
+
+  .pill {
+    width: 100%;
+    justify-content: flex-start;
   }
 }

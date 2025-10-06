@@ -7,12 +7,14 @@ import CasesTable from "@/components/cases/CasesTable";
 import CaseForm from "@/components/cases/CaseForm";
 import CaseCard from "@/components/cases/CaseCard";
 import Modal from "@/components/ui/Modal";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import { Button } from "@/components/ui/inputs";
 import useResponsive from "@/hooks/useResponsive";
 import useDebounce from "@/hooks/useDebounce";
 import { parseAmount, parseDate } from "@/lib/utils";
 import styles from "./page.module.css";
 
-export default function CasesPage() {
+function CasesPage() {
   const { isMobile } = useResponsive();
   const [field, setField] = useState("ყველა ველი");
   const [query, setQuery] = useState("");
@@ -140,8 +142,7 @@ export default function CasesPage() {
           <div className={styles.demoWarning}>Demo Mode: Writes disabled</div>
         )}
 
-        <div className={styles.headerRow}>
-          <h2 className={styles.title}>📋 საქმეების სია</h2>
+        <div className={styles.toolbar}>
           <div className={styles.searchBarWrapper}>
             <SearchBar
               field={field}
@@ -151,39 +152,42 @@ export default function CasesPage() {
               onClear={() => setQuery("")}
             />
           </div>
-        </div>
 
-        <div className={styles.actions}>
-          <button
-            onClick={() => {
-              setEditing(null);
-              setShowModal(true);
-            }}
-            disabled={demo}
-          >
-            ➕ დამატება
-          </button>
-          <button
-            onClick={() => {
-              if (selected) {
-                setEditing(selected);
+          <div className={styles.actions}>
+            <Button
+              onClick={() => {
+                setEditing(null);
                 setShowModal(true);
-              }
-            }}
-            disabled={demo || !selected}
-          >
-            ✏️ რედაქტირება
-          </button>
-          <button
-            onClick={handleDelete}
-            disabled={demo || !selected}
-            className="danger"
-          >
-            🗑️ წაშლა
-          </button>
-          <button onClick={handleExport} className="secondary">
-            📤 Excel ექსპორტი
-          </button>
+              }}
+              disabled={demo}
+              size="medium"
+            >
+              ➕ დამატება
+            </Button>
+            <Button
+              onClick={() => {
+                if (selected) {
+                  setEditing(selected);
+                  setShowModal(true);
+                }
+              }}
+              disabled={demo || !selected}
+              size="medium"
+            >
+              ✏️ რედაქტირება
+            </Button>
+            <Button
+              onClick={handleDelete}
+              disabled={demo || !selected}
+              variant="danger"
+              size="medium"
+            >
+              🗑️ წაშლა
+            </Button>
+            <Button onClick={handleExport} variant="secondary" size="medium">
+              📤 Excel ექსპორტი
+            </Button>
+          </div>
         </div>
 
         {loading ? (
@@ -252,5 +256,13 @@ export default function CasesPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ProtectedCasesPage() {
+  return (
+    <ProtectedRoute>
+      <CasesPage />
+    </ProtectedRoute>
   );
 }

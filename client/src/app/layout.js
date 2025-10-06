@@ -1,6 +1,7 @@
 "use client";
 
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Header from "@/components/layout/Header";
 
 export default function RootLayout({ children }) {
@@ -15,10 +16,12 @@ export default function RootLayout({ children }) {
         <title>საქმის მენეჯერი</title>
       </head>
       <body>
-        <Header />
-        <main style={{ paddingTop: "70px", minHeight: "100vh" }}>
-          {children}
-        </main>
+        <AuthProvider>
+          <Header />
+          <main style={{ paddingTop: "70px", minHeight: "100vh" }}>
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

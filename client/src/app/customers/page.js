@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { customerService } from "@/services";
 import { Button } from "@/components/ui/inputs";
 import CustomerForm from "@/components/customers/CustomerForm";
@@ -14,11 +14,7 @@ export default function CustomersPage() {
   const [editingCustomer, setEditingCustomer] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    loadCustomers();
-  }, [searchQuery]);
-
-  const loadCustomers = async () => {
+  const loadCustomers = useCallback(async () => {
     setLoading(true);
     try {
       const response = await customerService.getCustomers({
@@ -31,7 +27,11 @@ export default function CustomersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    loadCustomers();
+  }, [loadCustomers]);
 
   const handleCreate = () => {
     setEditingCustomer(null);
@@ -83,9 +83,7 @@ export default function CustomersPage() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>კლიენტები</h1>
-          <p className={styles.subtitle}>
-            მართეთ თქვენი კლიენტების ინფორმაცია
-          </p>
+          <p className={styles.subtitle}>მართეთ თქვენი კლიენტების ინფორმაცია</p>
         </div>
         <Button onClick={handleCreate}>+ ახალი კლიენტი</Button>
       </div>
@@ -114,7 +112,9 @@ export default function CustomersPage() {
         <div className={styles.modalOverlay} onClick={handleCancel}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h2>{editingCustomer ? "კლიენტის რედაქტირება" : "ახალი კლიენტი"}</h2>
+              <h2>
+                {editingCustomer ? "კლიენტის რედაქტირება" : "ახალი კლიენტი"}
+              </h2>
               <button className={styles.closeBtn} onClick={handleCancel}>
                 ✕
               </button>

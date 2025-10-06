@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import http from "@/lib/http";
 import styles from "./shared.module.css";
@@ -15,36 +15,39 @@ export default function SharedCasePage() {
   const [password, setPassword] = useState("");
   const [submittingPassword, setSubmittingPassword] = useState(false);
 
+  const verifyLink = useCallback(
+    async (pwd = "") => {
+      setLoading(true);
+      setError("");
+
+      try {
+        const params = pwd ? { password: pwd } : {};
+        const response = await http.get(`/shareable-links/${token}/verify`, {
+          params,
+        });
+
+        setData(response.data.case);
+        setRequiresPassword(false);
+      } catch (err) {
+        const errorData = err.response?.data;
+
+        if (errorData?.requiresPassword) {
+          setRequiresPassword(true);
+          setError("");
+        } else {
+          setError(errorData?.error || "Failed to load case");
+          setRequiresPassword(false);
+        }
+      } finally {
+        setLoading(false);
+      }
+    },
+    [token]
+  );
+
   useEffect(() => {
     verifyLink();
-  }, [token]);
-
-  const verifyLink = async (pwd = "") => {
-    setLoading(true);
-    setError("");
-
-    try {
-      const params = pwd ? { password: pwd } : {};
-      const response = await http.get(`/shareable-links/${token}/verify`, {
-        params,
-      });
-
-      setData(response.data.case);
-      setRequiresPassword(false);
-    } catch (err) {
-      const errorData = err.response?.data;
-
-      if (errorData?.requiresPassword) {
-        setRequiresPassword(true);
-        setError("");
-      } else {
-        setError(errorData?.error || "Failed to load case");
-        setRequiresPassword(false);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [verifyLink]);
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();

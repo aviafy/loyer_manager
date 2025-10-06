@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/inputs";
 import styles from "./TableManager.module.css";
@@ -28,7 +28,7 @@ export default function TableManager({
   const paginatedRows = rows.slice(startIndex, endIndex);
 
   // Reset to page 1 when rows change
-  useMemo(() => {
+  useEffect(() => {
     setCurrentPage(1);
   }, [rows.length]);
 

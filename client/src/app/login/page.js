@@ -73,7 +73,9 @@ export default function LoginPage() {
             />
           </FormSection>
 
-          {errors._global && <div className={styles.error}>{errors._global}</div>}
+          {errors._global && (
+            <div className={styles.error}>{errors._global}</div>
+          )}
 
           <FormActions>
             <Button type="submit" loading={isSubmitting} fullWidth>
@@ -82,7 +84,7 @@ export default function LoginPage() {
           </FormActions>
 
           <div className={styles.footer}>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/register" className={styles.link}>
               Register here
             </Link>

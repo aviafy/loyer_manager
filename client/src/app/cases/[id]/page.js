@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import http from "@/lib/http";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
@@ -49,20 +49,20 @@ function CaseDetailsPage() {
     };
   }, [id]);
 
-  useEffect(() => {
-    if (id && isStaffOrAdmin) {
-      loadShareableLinks();
-    }
-  }, [id, isStaffOrAdmin]);
-
-  const loadShareableLinks = async () => {
+  const loadShareableLinks = useCallback(async () => {
     try {
       const response = await http.get(`/shareable-links/case/${id}`);
       setShareableLinks(response.data.data || []);
     } catch (error) {
       console.error("Failed to load shareable links:", error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id && isStaffOrAdmin) {
+      loadShareableLinks();
+    }
+  }, [id, isStaffOrAdmin, loadShareableLinks]);
 
   const handleCreateLink = async (e) => {
     e.preventDefault();

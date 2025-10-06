@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
@@ -33,7 +34,12 @@ export default function Header() {
                 aria-expanded={isCompanyExpanded}
               >
                 <div className={styles.companyAvatar} aria-hidden="true">
-                  <img src="/default-company.svg" alt="" />
+                  <Image
+                    src="/default-company.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
                 </div>
                 <div className={styles.companyInfo}>
                   <div className={styles.companyName}>{company?.name}</div>

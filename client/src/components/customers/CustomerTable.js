@@ -8,7 +8,8 @@ export default function CustomerTable({ customers, onEdit, onDelete }) {
       <div className={styles.empty}>
         <p>კლიენტები არ მოიძებნა</p>
         <p className={styles.emptyHint}>
-          დააჭირეთ "+ ახალი კლიენტი" ღილაკს რომ დაამატოთ პირველი კლიენტი
+          დააჭირეთ &quot;+ ახალი კლიენტი&quot; ღილაკს რომ დაამატოთ პირველი
+          კლიენტი
         </p>
       </div>
     );
@@ -33,7 +34,9 @@ export default function CustomerTable({ customers, onEdit, onDelete }) {
                 <div className={styles.nameCell}>
                   <div className={styles.customerName}>{customer.name}</div>
                   {customer.address && (
-                    <div className={styles.customerAddress}>{customer.address}</div>
+                    <div className={styles.customerAddress}>
+                      {customer.address}
+                    </div>
                   )}
                 </div>
               </td>
